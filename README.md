@@ -22,7 +22,22 @@ A Learning with Zero project.
 
 ## Status
 
-Spec and constitution are written. The implementation plan (agent design) is next.
+Spec and constitution are written. The FastMCP tool server is built and tested. The supervisor and the three specialist agents are next.
+
+## Tool server
+
+A [FastMCP](https://gofastmcp.com) server ([src/zero_bed_by_midnight/server.py](src/zero_bed_by_midnight/server.py)) exposes six typed tools over the exports. Each tool's description is written in the words of the rules.
+
+| Tool | Does | Used by |
+|---|---|---|
+| `lookup_reservation` | Reads a ticket's reservation (never the answer key) | safety, rebooking, refund |
+| `search_open_listings` | Returns only export listings that pass all five comparable-home tests | rebooking |
+| `hold_booking` | Holds a comparable home; enforces the tests, the budget and one remedy per stay | rebooking |
+| `issue_refund` | Refunds EUR 0.01 up to `total_paid`; closes the stay | refund |
+| `message_host` | Messages the original host (simulated: recorded, not delivered) | rebooking |
+| `handoff_to_safety_agent` | Hands the case to a live safety agent; blocks refunds and holds after it | safety, rebooking, refund |
+
+The specialist allocation lives in [src/zero_bed_by_midnight/permissions.py](src/zero_bed_by_midnight/permissions.py). All three specialists must share one server instance, because holds, refunds, hand-offs and the uplift budget are kept in that instance's memory. The export files are only read, never written.
 
 ## Setup
 
@@ -30,10 +45,11 @@ Requires [uv](https://docs.astral.sh/uv/) and Python 3.14.
 
 ```bash
 uv sync
-uv run zero-bed-by-midnight
+uv run zero-bed-by-midnight   # runs the MCP server over stdio
+uv run pytest                 # runs the tests
 ```
 
-The ticket and open-listings exports contain guest details, so they are not in this repository. Supply them locally at run time.
+The ticket and open-listings exports contain guest details, so they are not in this repository. Put them in the project root, or point `ZBM_TICKETS_CSV` and `ZBM_LISTINGS_CSV` at them. Without them, the tests still run on the synthetic fixtures in `tests/fixtures/`, and the tests on the real 60 tickets are skipped.
 
 ## Spec Kit workflow
 

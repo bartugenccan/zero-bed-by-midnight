@@ -151,6 +151,25 @@ A qualifying guest who does not want another home, or for whom no comparable hom
 - **FR-018**: The system MUST track uplift for each rebooking: (new nightly price − original nightly price) × nights booked, counted only when the new price is higher.
 - **FR-019**: Total uplift across all 60 tickets MUST NOT exceed EUR 9,000. The EUR 150 average per rebooked guest is a planning figure, not a per-guest cap.
 
+**Specialists and tools**
+
+A supervisor routes each ticket to one of three specialists. The supervisor has only these three to route to. Each specialist may call only the tools listed for it:
+
+| Tool | Safety | Rebooking | Refund |
+|---|---|---|---|
+| `lookup_reservation` | yes | yes | yes |
+| `search_open_listings` | no | yes | no |
+| `hold_booking` | no | yes | no |
+| `issue_refund` | no | no | yes |
+| `message_host` | no | yes | no |
+| `handoff_to_safety_agent` | yes | yes | yes |
+
+- **FR-022**: The safety specialist MUST be able to call only `lookup_reservation` and `handoff_to_safety_agent`, so it cannot issue a refund or hold a booking.
+- **FR-023**: `message_host` MUST be available only to the rebooking specialist. It is used to check whether the host can still provide access or is unreachable.
+- **FR-024**: No specialist MAY hold both `hold_booking` and `issue_refund`. When the rebooking specialist finds no comparable home, or the guest declines rebooking, it passes the ticket to the refund specialist.
+- **FR-025**: Every specialist MUST be able to call `handoff_to_safety_agent`, so a safety condition that appears partway through a ticket is handed off at once.
+- **FR-026**: `search_open_listings` MUST return only listing IDs that exist in the open-listings export and pass all five comparable-home tests for the ticket.
+
 **Commitment and record**
 
 - **FR-020**: Every ticket MUST reach its outcome before midnight on 16 November 2026, Lisbon time.
