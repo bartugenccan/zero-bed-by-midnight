@@ -33,7 +33,7 @@ async def test_exactly_the_six_tools_with_policy_descriptions(small_client):
     assert "1.20 x original nightly_price" in d["search_open_listings"]
     assert "never exceeds" in d[REFUND] and "total_paid" in d[REFUND]
     assert "Forbidden on a safety ticket before handoff_to_safety_agent" in d[HOLD]
-    assert "Forbidden on a safety ticket before handoff_to_safety_agent" in d[REFUND]
+    assert d[REFUND].startswith("Forbidden on a safety ticket before handoff_to_safety_agent")
     assert "Simulated" in d["message_host"]
 
 
