@@ -1,50 +1,50 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version: template -> 1.0.0 (first ratified version)
+- Principles added: I. Safety Before Money, II. Read What the Guest Describes,
+  III. Never Pay More Than Was Paid, IV. Only Comparable Homes, V. Every Decision Is Explained
+- Sections added: Data Handling, Development Workflow, Governance
+- Templates: no changes needed (plan, spec and tasks templates read this file at runtime)
+-->
+
+# Zero Bed by Midnight Constitution
+
+These principles apply to every agent, tool and change in this project. They come from the AirCover Rebooking and Refund Rules for the Lisbon check-in incident on 16 November 2026. The full requirements are in [specs/001-stranded-guest-resolution/spec.md](../../specs/001-stranded-guest-resolution/spec.md).
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Safety Before Money (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Every ticket is checked for the five safety conditions before anything else: injury or medical need, threat or violence, nowhere safe to wait, unaccompanied minor, and stated fear of a person. On a safety ticket, the only allowed booking action is `handoff_to_safety_agent`. `issue_refund` and `hold_booking` are forbidden before the hand-off, even when the guest asks only for money. After the hand-off, the live safety agent decides.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Read What the Guest Describes
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Outcomes come from what the guest describes in their message. The request type they selected, the words they use and their tone do not decide the outcome. A calm refund request can be a safety case. An angry message or a request for a call is not a safety case on its own.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Never Pay More Than Was Paid
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+A refund is never more than the ticket's total paid, with no goodwill additions. One remedy per stay: a refunded stay is not also rebooked, and a rebooked stay is not also refunded. Total rebooking uplift stays within the EUR 9,000 incident budget.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Only Comparable Homes
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+A guest is only offered an open listing that passes all five tests: dates covered with no gap, fits the party, enough bedrooms, `available` at the moment of the hold, and priced at no more than 1.20 × the original nightly price. On 16 November 2026, nothing above that ceiling is offered.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Every Decision Is Explained
+
+Each ticket ends with exactly one outcome (safety hand-off, rebooking or refund) and a recorded reason. A case the policy does not cover goes to a person. It is not guessed.
+
+## Data Handling
+
+This repository is public. Guest data (the ticket export and the open-listings export) is supplied at run time and is never committed. Code, tests, logs and docs use ticket IDs, not guest names or verbatim guest messages.
+
+## Development Workflow
+
+- Specs, plans and tasks follow the Spec Kit flow: specify, plan, tasks, implement.
+- Every principle above MUST have an automated check against the 60 incident tickets before a change is accepted.
+- The reviewed outcome on each ticket is used only to check results, never as an input to a decision.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution overrides other project guidance. A change to a principle needs a written reason and a version bump: MAJOR for removing or redefining a principle, MINOR for adding one, PATCH for wording.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-11-18 | **Last Amended**: 2026-11-18
