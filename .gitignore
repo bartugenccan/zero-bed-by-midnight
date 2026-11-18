@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Claude Code local settings (personal, may hold secrets)
+.claude/settings.local.json
+
+# Incident data (kept local, not committed)
+/AirCover Rebooking and Refund Rules - Lisbon Check-In Incident.md
+/Lisbon Stranded Guest Tickets (16 Nov 2026).csv
