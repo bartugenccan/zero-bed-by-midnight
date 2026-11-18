@@ -204,8 +204,8 @@ def create_server(
         description=(
             "Forbidden on a safety ticket before handoff_to_safety_agent, and refused after it, "
             "even when the guest asks only for money. "
-            "Refund a guest who declines rebooking or for whom no open listing passes the "
-            "comparable-home test (then the full total_paid is due). The refund never exceeds "
+            "The full total_paid is due when no open listing passes the comparable-home test, "
+            "or when the guest declines rebooking. The refund never exceeds "
             "the ticket's total_paid: no goodwill or inconvenience additions. Any amount from "
             "EUR 0.01 up to total_paid is within policy. A refund closes the stay and is not "
             "combined with a rebooking for the same nights."
